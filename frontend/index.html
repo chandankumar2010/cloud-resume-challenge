@@ -30,6 +30,29 @@
 	<script>window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		}</script>
+	<script>
+		function callAPI() {
+		  //API URL	
+		  const url = "https://cloud-resume-api-dev.azurewebsites.net/api/http_trigger"; 
+		  const request = new XMLHttpRequest();
+		  request.open("GET", url);
+		  request.onload = function() {
+			if (request.status === 200) {
+			  const response = JSON.parse(request.responseText);
+			  const views = response.views; // Extract the value for "views"
+			  document.getElementById("response").innerHTML = views // Display only the number
+			} else {
+			  document.getElementById("response").innerHTML = "Error: " + request.statusText;
+			}
+		  };
+		  request.onerror = function() {
+			document.getElementById("response").innerHTML = "Error: Network connection failed";
+		  };
+		  request.send();
+		}
+	
+		window.onload = callAPI; // Call API on page load
+	  </script>
 
 </head>
 
