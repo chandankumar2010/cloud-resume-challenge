@@ -1,7 +1,7 @@
 import azure.functions as func
 import logging
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 @app.route(route="http_trigger")
 #input bindings to read the document
 @app.cosmos_db_input(arg_name="inputDocuments", database_name="visitor", container_name="count", connection="cosmosDBConnectionSetting")
